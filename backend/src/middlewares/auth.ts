@@ -4,16 +4,16 @@ import { promisify } from "util";
 
 import authConfig from "../config/auth";
 
+interface Data extends Request {
+    userId: number;
+}
+
 interface Decoded {
     id: number;
 }
 
-interface Data {
-    userId: number;
-}
-
 const authMiddleware = async (
-    request: Data & Request,
+    request: Request,
     response: Response,
     next: NextFunction
 ) => {
@@ -26,10 +26,7 @@ const authMiddleware = async (
     const [, token] = authHeader.split(" ");
 
     try {
-        const decoded = await promisify(jwt.verify)(token, authConfig.secret);
-
-        const decodedd = decoded as Decoded;
-        request.userId = decodedd.id;
+        await promisify(jwt.verify)(token, authConfig.secret);
 
         return next();
     } catch (error) {

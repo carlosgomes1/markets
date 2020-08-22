@@ -7,10 +7,8 @@ import ProductController from "./controllers/ProductController";
 
 const routes = Router();
 
-routes.use(authMiddleware);
+routes.post("/users", MarketController.create);
 
-routes.get("/", (request, response) => {
-    return response.send("Hello World");
-});
+routes.use(authMiddleware);
 
 export default routes;
