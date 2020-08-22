@@ -4,14 +4,6 @@ import { promisify } from "util";
 
 import authConfig from "../config/auth";
 
-interface Data extends Request {
-    userId: number;
-}
-
-interface Decoded {
-    id: number;
-}
-
 const authMiddleware = async (
     request: Request,
     response: Response,
