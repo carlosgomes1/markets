@@ -14,9 +14,13 @@ routes.get("/markets/:id", MarketController.show);
 
 routes.post("/session", SessionController.create);
 
+routes.get("/products", ProductController.index);
+
 routes.use(authMiddleware);
 
 routes.delete("/markets", MarketController.delete);
 routes.put("/markets", MarketController.update);
+
+routes.post("/products", ProductController.create);
 
 export default routes;

@@ -25,7 +25,7 @@ const authMiddleware = async (
         const decoded = await promisify(jwt.verify)(token, authConfig.secret);
         const decodedInterface = decoded as Decoded;
 
-        request.userId = decodedInterface.id;
+        request.marketId = decodedInterface.id;
 
         return next();
     } catch (error) {

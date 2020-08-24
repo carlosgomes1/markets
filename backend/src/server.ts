@@ -6,7 +6,7 @@ import routes from "./routes";
 declare global {
     namespace Express {
         interface Request {
-            userId: number;
+            marketId: number;
         }
     }
 }

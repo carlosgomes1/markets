@@ -16,7 +16,7 @@ interface Market {
 
 class MarketController {
     async delete(request: Request, response: Response) {
-        await connection("markets").where({ id: request.userId }).delete();
+        await connection("markets").where({ id: request.marketId }).delete();
 
         return response.json({ message: "Market successfully deleted" });
     }
@@ -35,7 +35,7 @@ class MarketController {
         const { oldPassword, newPassword } = request.body;
 
         const market = await connection("markets")
-            .where({ id: request.userId })
+            .where({ id: request.marketId })
             .first();
 
         if (oldPassword !== market.password) {
@@ -43,7 +43,7 @@ class MarketController {
         }
 
         await connection("markets")
-            .where({ id: request.userId })
+            .where({ id: request.marketId })
             .update({ password: newPassword });
 
         return response.json({ message: "Password changed successfully" });
