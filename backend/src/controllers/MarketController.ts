@@ -17,7 +17,38 @@ interface Market {
 class MarketController {
     async delete(request: Request, response: Response) {}
 
-    async update(request: Request, response: Response) {}
+    async update(request: Request, response: Response) {
+        const { id } = request.params;
+        const { marketid } = request.headers;
+
+        console.log(request.headers.marketid);
+
+        if (id !== marketid) {
+            return response
+                .status(403)
+                .json({ error: "Cannot change a profile other than yours" });
+        }
+
+        if (!id) {
+            return response
+                .status(400)
+                .json({ error: "Property id is required" });
+        }
+
+        const { oldPassword, newPassword } = request.body;
+
+        const market = await connection("markets").where({ id }).first();
+
+        if (oldPassword !== market.password) {
+            return response.status(400).json({ error: "Wrong old password" });
+        }
+
+        await connection("markets")
+            .where({ id })
+            .update({ password: newPassword });
+
+        return response.json({ message: "Password changed successfully" });
+    }
 
     async show(request: Request, response: Response) {
         const { id } = request.params;
