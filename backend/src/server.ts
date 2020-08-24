@@ -3,6 +3,14 @@ import express from "express";
 
 import routes from "./routes";
 
+declare global {
+    namespace Express {
+        interface Request {
+            userId: number;
+        }
+    }
+}
+
 const app = express();
 
 app.use(cors());

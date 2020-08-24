@@ -15,36 +15,35 @@ interface Market {
 }
 
 class MarketController {
-    async delete(request: Request, response: Response) {}
+    async delete(request: Request, response: Response) {
+        await connection("markets").where({ id: request.userId }).delete();
+
+        return response.json({ message: "Market successfully deleted" });
+    }
 
     async update(request: Request, response: Response) {
-        const { id } = request.params;
-        const { marketid } = request.headers;
+        const schema = Yup.object().shape({
+            newPassword: Yup.string().min(6),
+        });
 
-        console.log(request.headers.marketid);
-
-        if (id !== marketid) {
-            return response
-                .status(403)
-                .json({ error: "Cannot change a profile other than yours" });
-        }
-
-        if (!id) {
+        if (!(await schema.isValid(request.body))) {
             return response
                 .status(400)
-                .json({ error: "Property id is required" });
+                .json({ error: "Password must be at least 6 characters" });
         }
 
         const { oldPassword, newPassword } = request.body;
 
-        const market = await connection("markets").where({ id }).first();
+        const market = await connection("markets")
+            .where({ id: request.userId })
+            .first();
 
         if (oldPassword !== market.password) {
             return response.status(400).json({ error: "Wrong old password" });
         }
 
         await connection("markets")
-            .where({ id })
+            .where({ id: request.userId })
             .update({ password: newPassword });
 
         return response.json({ message: "Password changed successfully" });

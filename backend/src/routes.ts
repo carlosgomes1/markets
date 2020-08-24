@@ -16,7 +16,7 @@ routes.post("/session", SessionController.create);
 
 routes.use(authMiddleware);
 
-routes.delete("/markets/:id", MarketController.delete);
-routes.put("/markets/:id", MarketController.update);
+routes.delete("/markets", MarketController.delete);
+routes.put("/markets", MarketController.update);
 
 export default routes;
