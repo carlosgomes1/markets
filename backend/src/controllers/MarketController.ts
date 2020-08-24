@@ -24,6 +24,8 @@ class MarketController {
 
         const market = await connection("markets").where({ id }).first();
 
+        delete market.password;
+
         return response.json(market);
     }
 
