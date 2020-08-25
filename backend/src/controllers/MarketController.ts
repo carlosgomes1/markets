@@ -3,6 +3,8 @@ import * as Yup from "yup";
 
 import connection from "../database/connection";
 
+import PathToUrl from "../utils/PathToUrl";
+
 interface Market {
     id: number;
     name: string;
@@ -12,6 +14,7 @@ interface Market {
     address: string;
     address_number: string;
     address_complement: string;
+    path: string;
 }
 
 class MarketController {
@@ -53,14 +56,30 @@ class MarketController {
         const { id } = request.params;
 
         const market = await connection("markets").where({ id }).first();
+        const avatarMarket = await connection("avatar")
+            .where({
+                market_id: id,
+            })
+            .first();
+
+        const url = PathToUrl(avatarMarket.path);
+        const avatar = { ...avatarMarket, url };
 
         delete market.password;
 
-        return response.json(market);
+        return response.json({
+            market: market,
+            avatar,
+        });
     }
 
     async index(request: Request, response: Response) {
-        const markets = await connection("markets");
+        const markets = await connection("markets")
+            .select(["markets.*", "avatar.id as avatar_id", "avatar.path"])
+            .from("markets")
+            .leftJoin("avatar", "avatar.market_id", "markets.id");
+
+        console.log(markets);
 
         const marketsFiltered = markets.filter((market: Market) => {
             const newMarkets = delete market.password;

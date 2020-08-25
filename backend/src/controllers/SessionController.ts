@@ -5,6 +5,8 @@ import * as Yup from "yup";
 import authConfig from "../config/auth";
 import connection from "../database/connection";
 
+import PathToUrl from "../utils/PathToUrl";
+
 class SessionController {
     async create(request: Request, response: Response) {
         const schema = Yup.object().shape({
@@ -34,13 +36,19 @@ class SessionController {
                 .json({ error: "Password does not match" });
         }
 
-        const { id, name, email } = market;
+        const { id, name, email, path } = market;
+
+        const url = PathToUrl(path);
 
         return response.json({
             user: {
                 id,
                 name,
                 email,
+            },
+            avatar: {
+                path,
+                url,
             },
             token: jwt.sign({ id }, authConfig.secret, {
                 expiresIn: authConfig.expiresIn,
