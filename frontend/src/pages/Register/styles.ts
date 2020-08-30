@@ -49,6 +49,8 @@ export const FormContainer = styled.div`
   align-items: center;
   flex-direction: column;
 
+  align-self: center;
+
   h1 {
     font: 700 4rem Archivo;
     color: #575a89;

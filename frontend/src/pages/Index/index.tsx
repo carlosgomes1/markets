@@ -1,4 +1,5 @@
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -8,6 +9,16 @@ import svg from '../../assets/index_svg.svg';
 import { Container, Main, Content, ButtonContainer, Button } from './styles';
 
 const Index: React.FC = () => {
+  const history = useHistory();
+
+  function handleNavigateToLogin() {
+    history.push('/login');
+  }
+
+  function handleNavigateToRegister() {
+    history.push('/register');
+  }
+
   return (
     <Container>
       <Header />
@@ -20,8 +31,12 @@ const Index: React.FC = () => {
             torne-se visível na plataforma.
           </p>
           <ButtonContainer>
-            <Button tipo="cadastrar"> Cadastre-se </Button>
-            <Button tipo="login"> Faça Login </Button>
+            <Button tipo="cadastrar" onClick={handleNavigateToRegister}>
+              Cadastre-se
+            </Button>
+            <Button tipo="login" onClick={handleNavigateToLogin}>
+              Faça Login
+            </Button>
           </ButtonContainer>
         </Content>
         <img src={svg} alt="Página inicial" />

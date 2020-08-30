@@ -9,6 +9,7 @@ import {
   FaBuilding,
 } from 'react-icons/fa';
 import { useHistory } from 'react-router-dom';
+import * as Yup from 'yup';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -30,6 +31,15 @@ import {
   Button,
 } from './styles';
 
+const schema = Yup.object().shape({
+  name: Yup.string().required(),
+  email: Yup.string().required(),
+  password: Yup.string().min(6).required(),
+  address: Yup.string().required(),
+  address_number: Yup.number().required(),
+  address_complement: Yup.string().notRequired(),
+});
+
 const Register: React.FC = () => {
   const [data, setData] = useState({
     name: '',
@@ -45,9 +55,9 @@ const Register: React.FC = () => {
 
   const history = useHistory();
 
-  function handleCloseModal() {
+  async function handleCloseModal() {
     if (modalError) {
-      setModalError(false);
+      setModalError(true);
       setModalActive(!modalActive);
     } else {
       setModalActive(!modalActive);
@@ -58,7 +68,7 @@ const Register: React.FC = () => {
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
-    if (data.password.length < 6) {
+    if (!(await schema.isValid(data))) {
       setModalError(true);
       setModalActive(!modalActive);
       return;

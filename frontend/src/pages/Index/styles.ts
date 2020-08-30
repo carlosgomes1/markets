@@ -49,6 +49,7 @@ export const Main = styled.main`
 
 export const Content = styled.div`
   grid-area: main;
+  align-self: center;
 
   h1 {
     font: 700 4.6rem Archivo;

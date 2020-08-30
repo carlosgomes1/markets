@@ -45,6 +45,9 @@ export const LoginContainer = styled.div`
 
 export const FormContainer = styled.div`
   grid-area: login;
+
+  align-self: center;
+
   display: flex;
   justify-content: center;
   align-items: center;
