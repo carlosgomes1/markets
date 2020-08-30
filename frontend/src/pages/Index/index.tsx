@@ -1,30 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Modal from '../../components/Modal';
 
 import svg from '../../assets/index_svg.svg';
 
 import { Container, Main, Content, ButtonContainer, Button } from './styles';
 
 const Index: React.FC = () => {
-  const [modalActive, setModalActive] = useState(true);
-
-  function handleCloseModal() {
-    setModalActive(!modalActive);
-  }
-
   return (
     <Container>
       <Header />
-      <Modal
-        typeModal="error"
-        message="Campos preenchidos incorretamente!"
-        button="Entendi!"
-        active={modalActive}
-        handle={handleCloseModal}
-      />
       <Main>
         <Content>
           <h1>Plataforma de divulgação on-line</h1>

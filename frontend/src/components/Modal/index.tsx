@@ -28,7 +28,7 @@ const Modal: React.FC<Props> = ({
   return (
     <ModalContainer active={active}>
       <ContainerTitle>
-        <Title typeModal="error">
+        <Title typeModal={typeModal}>
           {typeModal === 'error' ? 'Oooooops!' : 'Sucesso!'}
         </Title>
       </ContainerTitle>
@@ -36,7 +36,7 @@ const Modal: React.FC<Props> = ({
         <Body>{message}</Body>
       </ContainerBody>
       <ContainerButton>
-        <Button typeModal="error" onClick={handle}>
+        <Button typeModal={typeModal} onClick={handle}>
           {' '}
           {button}{' '}
         </Button>
