@@ -55,7 +55,7 @@ const Register: React.FC = () => {
 
   const history = useHistory();
 
-  async function handleCloseModal() {
+  function handleCloseModal() {
     if (modalError) {
       setModalError(true);
       setModalActive(!modalActive);
@@ -129,7 +129,7 @@ const Register: React.FC = () => {
               <FaLock />
               <input
                 type="password"
-                placeholder="Senha..."
+                placeholder="Senha... (Min. 6 carácteres)"
                 value={data.password}
                 onChange={(text) =>
                   setData({ ...data, password: text.target.value })
