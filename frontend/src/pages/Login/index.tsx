@@ -4,7 +4,6 @@ import * as Yup from 'yup';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Modal from '../../components/Modal';
 
 import { useToast } from '../../hooks/toast';
 import { useAuth } from '../../hooks/auth';
@@ -22,8 +21,10 @@ import {
 } from './styles';
 
 const schema = Yup.object().shape({
-  email: Yup.string().required(),
-  password: Yup.string().min(6).required(),
+  email: Yup.string().required('O email é obrigatório'),
+  password: Yup.string()
+    .min(6, 'Senha no mínimo 6 carácteres')
+    .required('A senha é obrigatória'),
 });
 
 const Login: React.FC = () => {
@@ -31,22 +32,26 @@ const Login: React.FC = () => {
     email: '',
     password: '',
   });
-  const [modalActive, setModalActive] = useState(false);
 
   const { signIn } = useAuth();
   const { addToast } = useToast();
-
-  const handleCloseModal = useCallback(() => {
-    setModalActive(!modalActive);
-  }, [modalActive]);
 
   const handleLogin = useCallback(
     async (event: FormEvent) => {
       event.preventDefault();
 
-      try {
-        await schema.isValid(data);
+      if (!(await schema.isValid(data))) {
+        addToast({
+          type: 'error',
+          title: 'Erro nas credenciais de acesso',
+          description:
+            'Alguma coisa nas credenciais está errada, tente novamente.',
+        });
 
+        return;
+      }
+
+      try {
         await signIn({
           email: data.email,
           password: data.password,
@@ -66,13 +71,7 @@ const Login: React.FC = () => {
   return (
     <Container>
       <Header />
-      <Modal
-        typeModal="error"
-        message="Ocorreu um erro, tente novamente."
-        button="OK!"
-        active={modalActive}
-        handle={handleCloseModal}
-      />
+
       <LoginContainer>
         <img src={svg} alt="Login" />
         <FormContainer>

@@ -13,7 +13,8 @@ import * as Yup from 'yup';
 
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import Modal from '../../components/Modal';
+
+import { useToast } from '../../hooks/toast';
 
 import svg from '../../assets/register_svg.svg';
 
@@ -50,54 +51,45 @@ const Register: React.FC = () => {
     address_number: 0,
     address_complement: '',
   });
-  const [modalActive, setModalActive] = useState(false);
-  const [modalError, setModalError] = useState(true);
 
+  const { addToast } = useToast();
   const history = useHistory();
-
-  function handleCloseModal() {
-    if (modalError) {
-      setModalError(true);
-      setModalActive(!modalActive);
-    } else {
-      setModalActive(!modalActive);
-      history.push('/');
-    }
-  }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
     if (!(await schema.isValid(data))) {
-      setModalError(true);
-      setModalActive(!modalActive);
+      addToast({
+        type: 'error',
+        title: 'Erro no cadastro',
+        description: 'Suas credenciais estão inválidas. Tente novamente.',
+      });
       return;
     }
 
     try {
       await api.post('/markets', data);
-      setModalError(false);
-      setModalActive(!modalActive);
+      addToast({
+        type: 'success',
+        title: `Bem vindo(a), ${data.name}`,
+        description: 'Sua conta foi criada com sucesso.',
+      });
+
+      history.push('/login');
     } catch (error) {
-      setModalError(true);
-      setModalActive(!modalActive);
+      addToast({
+        type: 'error',
+        title: 'Erro na aplicação',
+        description:
+          'Ocorreu um erro durante o envio das suas informações, tente novamente mais tarde.',
+      });
     }
   }
 
   return (
     <Container>
       <Header />
-      <Modal
-        typeModal={modalError ? 'error' : 'success'}
-        message={
-          modalError
-            ? 'Ocorreu um erro, tente novamente mais tarde.'
-            : `Bem-vindo, ${data.name}, sua conta foi criada com sucesso.`
-        }
-        button={modalError ? 'Entendi!' : 'Legal!'}
-        active={modalActive}
-        handle={handleCloseModal}
-      />
+
       <RegisterContainer>
         <img src={svg} alt="Register" />
         <FormContainer>
