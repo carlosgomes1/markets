@@ -6,7 +6,7 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Modal from '../../components/Modal';
 
-import { useAuth } from '../../Context/AuthContext';
+import { useAuth } from '../../hooks/AuthContext';
 
 import svg from '../../assets/login_svg.svg';
 
