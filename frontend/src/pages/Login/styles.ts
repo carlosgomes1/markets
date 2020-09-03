@@ -1,5 +1,17 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
+
+const AppearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
 
 export const Container = styled.div`
   height: 100vh;
@@ -52,6 +64,8 @@ export const FormContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  animation: ${AppearFromRight} 1s;
 
   h1 {
     font: 700 4rem Archivo;

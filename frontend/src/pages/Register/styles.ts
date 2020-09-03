@@ -1,4 +1,16 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const AppearFromRight = keyframes`
+  from {
+    opacity: 0;
+    transform: translateX(50px)
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+`;
 
 export const Container = styled.div`
   height: 100vh;
@@ -50,6 +62,8 @@ export const FormContainer = styled.div`
   flex-direction: column;
 
   align-self: center;
+
+  animation: ${AppearFromRight} 1s;
 
   h1 {
     font: 700 4rem Archivo;

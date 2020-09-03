@@ -6,7 +6,8 @@ import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Modal from '../../components/Modal';
 
-import { useAuth } from '../../hooks/AuthContext';
+import { useToast } from '../../hooks/toast';
+import { useAuth } from '../../hooks/auth';
 
 import svg from '../../assets/login_svg.svg';
 
@@ -32,9 +33,8 @@ const Login: React.FC = () => {
   });
   const [modalActive, setModalActive] = useState(false);
 
-  const { signIn, user, avatar } = useAuth();
-
-  console.log(user, avatar);
+  const { signIn } = useAuth();
+  const { addToast } = useToast();
 
   const handleCloseModal = useCallback(() => {
     setModalActive(!modalActive);
@@ -44,17 +44,23 @@ const Login: React.FC = () => {
     async (event: FormEvent) => {
       event.preventDefault();
 
-      if (!(await schema.isValid(data))) {
-        setModalActive(true);
-        return;
-      }
+      try {
+        await schema.isValid(data);
 
-      signIn({
-        email: data.email,
-        password: data.password,
-      });
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (error) {
+        addToast({
+          type: 'error',
+          title: 'Erro na autenticação',
+          description:
+            'Ocorreu um erro ao fazer login, cheque suas credenciais.',
+        });
+      }
     },
-    [data, signIn]
+    [data, signIn, addToast]
   );
 
   return (

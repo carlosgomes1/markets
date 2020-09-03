@@ -7,12 +7,25 @@ import {
   NavBar,
   NavItem,
   Divisor,
+  Info,
+  ImageMarket,
 } from './styles';
+
+import { useAuth } from '../../hooks/auth';
 
 import logo from '../../assets/logo.png';
 
 const Navbar: React.FC = () => {
-  return (
+  const { avatar, user } = useAuth();
+
+  return avatar ? (
+    <NavBar>
+      <Info>
+        Bem-vindo, <strong>{user.name}</strong>
+      </Info>
+      <ImageMarket src={avatar.url} />
+    </NavBar>
+  ) : (
     <NavBar>
       <NavItem to="/register"> Registrar-se </NavItem>
       <Divisor />

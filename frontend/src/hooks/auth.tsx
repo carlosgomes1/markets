@@ -2,22 +2,33 @@ import React, { createContext, useContext, useCallback, useState } from 'react';
 
 import api from '../services/api';
 
-interface AuthState {
-  token: string;
-  avatar: object;
-  user: object;
-}
-
 interface SignInCredentials {
   email: string;
   password: string;
 }
 
+interface AvatarProps {
+  url: string;
+}
+
+interface UserProps {
+  email: string;
+  id: number;
+  name: string;
+}
+
 interface AuthContextData {
-  user: object;
-  avatar: object;
+  user: UserProps;
+  avatar: AvatarProps;
+  token: string;
   signIn(credentials: SignInCredentials): Promise<void>;
   signOut(): void;
+}
+
+interface AuthState {
+  token: string;
+  avatar: AvatarProps;
+  user: UserProps;
 }
 
 const AuthContext = createContext<AuthContextData>({} as AuthContextData);
@@ -60,7 +71,13 @@ const AuthProvider: React.FC = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user: data.user, avatar: data.avatar, signIn, signOut }}
+      value={{
+        user: data.user,
+        avatar: data.avatar,
+        token: data.token,
+        signIn,
+        signOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

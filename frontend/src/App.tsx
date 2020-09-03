@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import Routes from './routes';
 
-import { AuthProvider } from './hooks/AuthContext';
+import AppProvider from './hooks';
 
 import GlobalStyle from './styles/GlobalStyle';
 
@@ -11,9 +11,9 @@ function App() {
   return (
     <BrowserRouter>
       <GlobalStyle />
-      <AuthProvider>
+      <AppProvider>
         <Routes />
-      </AuthProvider>
+      </AppProvider>
     </BrowserRouter>
   );
 }

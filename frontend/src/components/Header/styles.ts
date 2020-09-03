@@ -59,3 +59,20 @@ export const Divisor = styled.div`
   width: 1px;
   height: 2rem;
 `;
+
+export const Info = styled.span`
+  font: 500 2.3rem Archivo;
+
+  strong {
+    font: 700 2.4rem Archivo;
+  }
+
+  margin-right: 24px;
+`;
+
+export const ImageMarket = styled.img`
+  width: 60px;
+  height: 60px;
+
+  padding: 4px;
+`;

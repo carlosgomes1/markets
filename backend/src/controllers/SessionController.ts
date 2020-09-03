@@ -7,6 +7,10 @@ import connection from "../database/connection";
 
 import PathToUrl from "../utils/PathToUrl";
 
+interface AvatarProps {
+    url: string;
+}
+
 class SessionController {
     async create(request: Request, response: Response) {
         const schema = Yup.object().shape({
@@ -36,7 +40,13 @@ class SessionController {
                 .json({ error: "Password does not match" });
         }
 
-        const { id, name, email, path } = market;
+        const { id, name, email } = market;
+
+        const { path } = await connection("avatar")
+            .where({
+                market_id: id,
+            })
+            .first();
 
         const url = PathToUrl(path);
 
@@ -47,7 +57,6 @@ class SessionController {
                 email,
             },
             avatar: {
-                path,
                 url,
             },
             token: jwt.sign({ id }, authConfig.secret, {
