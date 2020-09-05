@@ -57,7 +57,7 @@ const Dashboard: React.FC = () => {
             <FaSignOutAlt size={30} color="#575a89" />
             <strong> Sair do app </strong>
           </LeftHeaderContent>
-          <ButtonAddNewProduct onClick={() => console.log(items)}>
+          <ButtonAddNewProduct to="/newproduct">
             <strong>Adicionar novo produto</strong>
             <FiArrowRight size={18} />
           </ButtonAddNewProduct>

@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const AppearFromBottom = keyframes`
   from {
@@ -66,11 +67,13 @@ export const LeftHeaderContent = styled.div`
   }
 `;
 
-export const ButtonAddNewProduct = styled.button`
+export const ButtonAddNewProduct = styled(Link)`
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 8px;
+
+  text-decoration: none;
 
   strong {
     color: white;

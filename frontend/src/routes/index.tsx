@@ -8,6 +8,7 @@ import Register from '../pages/Register';
 import Login from '../pages/Login';
 
 import Dashboard from '../pages/Dashboard';
+import NewProduct from '../pages/NewProduct';
 
 const Routes: React.FC = () => {
   return (
@@ -16,6 +17,7 @@ const Routes: React.FC = () => {
       <Route path="/register" component={Register} />
       <Route path="/login" component={Login} />
       <Route path="/dashboard" component={Dashboard} isPrivate />
+      <Route path="/newproduct" component={NewProduct} isPrivate />
     </Switch>
   );
 };

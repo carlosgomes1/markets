@@ -42,13 +42,19 @@ class SessionController {
 
         const { id, name, email } = market;
 
-        const { path } = await connection("avatar")
+        const market_avatar = await connection("avatar")
             .where({
                 market_id: id,
             })
             .first();
 
-        const url = PathToUrl(path);
+        let url;
+
+        if (!market_avatar) {
+            url = undefined;
+        } else {
+            url = PathToUrl(market_avatar.path);
+        }
 
         return response.json({
             user: {
