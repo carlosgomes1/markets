@@ -3,6 +3,10 @@ import styled, { keyframes } from 'styled-components';
 import Colors from '../../design/color';
 import Fonts from '../../design/font';
 
+interface ButtonProps {
+  tipo: string;
+}
+
 const AppearFromLeft = keyframes`
   from {
     opacity: 0;
@@ -84,14 +88,16 @@ export const Input = styled.input`
   margin: 24px 0;
 `;
 
-export const Button = styled.button`
-  width: 80%;
+export const Button = styled.button<ButtonProps>`
+  width: 49%;
 
   border-radius: 8px;
   border: 1px solid ${Colors.primary};
 
-  background-color: ${Colors.primary};
-  color: ${Colors.secondary};
+  background-color: ${(props: ButtonProps) =>
+    props.tipo === 'next' ? `${Colors.primary}` : `${Colors.secondary}`};
+  color: ${(props: ButtonProps) =>
+    props.tipo === 'next' ? `${Colors.secondary}` : `${Colors.primary}`};
   font: 500 1.6rem ${Fonts.main};
 
   padding: 8px;
@@ -99,9 +105,33 @@ export const Button = styled.button`
   transition: 0.3s;
 
   &:hover {
-    background-color: ${Colors.secondary};
-    color: ${Colors.primary};
+    background-color: ${(props: ButtonProps) =>
+      props.tipo === 'next' ? `${Colors.secondary}` : `${Colors.primary}`};
+    color: ${(props: ButtonProps) =>
+      props.tipo === 'next' ? `${Colors.primary}` : `${Colors.secondary}`};
   }
 
   cursor: pointer;
+`;
+
+export const ButtonContainer = styled.div`
+  width: 80%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+`;
+
+export const TextArea = styled.textarea`
+  padding: 8px;
+  border: 1.6px solid ${Colors.primary};
+  border-radius: 8px;
+
+  width: 80%;
+  height: 30%;
+
+  max-height: 150px;
+
+  font: 500 1.8rem ${Fonts.main};
+
+  margin: 24px 0;
 `;
