@@ -9,6 +9,8 @@ import { useHistory } from 'react-router-dom';
 
 import api from '../services/api';
 
+import { useToast } from './toast';
+
 interface ProductProps {
   id?: number;
   name: string | number;
@@ -35,26 +37,51 @@ const ProductProvider: React.FC = ({ children }) => {
   const [steps, setSteps] = useState(1);
 
   const history = useHistory();
+  const { addToast } = useToast();
 
   const attProduct = useCallback(
     (event: FormEvent, step: number, data: string | number) => {
       event.preventDefault();
 
       if (step === 1) {
-        setProduct({ ...product, name: data });
-        setSteps(steps + 1);
+        if (data === '') {
+          addToast({
+            type: 'error',
+            title: 'O nome não pode estar vazio',
+            description: 'Você tentou avançar sem preencher um campo.',
+          });
+        } else {
+          setProduct({ ...product, name: data });
+          setSteps(steps + 1);
+        }
       } else if (step === 2) {
-        setProduct({ ...product, old_value: data });
-        setSteps(steps + 1);
+        if (data === 0) {
+          addToast({
+            type: 'error',
+            title: 'O valor do produto não pode ser 0',
+            description: 'Você tentou avançar sem preencher um campo.',
+          });
+        } else {
+          setProduct({ ...product, old_value: data });
+          setSteps(steps + 1);
+        }
       } else if (step === 3) {
-        setProduct({ ...product, new_value: data });
-        setSteps(steps + 1);
+        if (data === 0) {
+          addToast({
+            type: 'error',
+            title: 'O valor do produto não pode ser 0',
+            description: 'Você tentou avançar sem preencher um campo.',
+          });
+        } else {
+          setProduct({ ...product, new_value: data });
+          setSteps(steps + 1);
+        }
       } else if (step === 4) {
         setProduct({ ...product, description: data });
         setSteps(steps + 1);
       }
     },
-    [product, steps]
+    [product, steps, addToast]
   );
 
   const backStep = useCallback(() => {

@@ -6,9 +6,9 @@ import { ProductProvider } from './product';
 
 const AppProvider: React.FC = ({ children }) => (
   <AuthProvider>
-    <ProductProvider>
-      <ToastProvider>{children}</ToastProvider>
-    </ProductProvider>
+    <ToastProvider>
+      <ProductProvider>{children}</ProductProvider>
+    </ToastProvider>
   </AuthProvider>
 );
 
