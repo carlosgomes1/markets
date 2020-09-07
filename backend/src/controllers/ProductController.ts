@@ -86,7 +86,7 @@ class ProductController {
 
         const { old_price, new_price, name, description = "" } = request.body;
 
-        await connection("products").insert({
+        const product = await connection("products").insert({
             old_price,
             new_price,
             name,
@@ -94,7 +94,7 @@ class ProductController {
             market_id: request.marketId,
         });
 
-        return response.json({ message: "Ok" });
+        return response.json({ id: product });
     }
 }
 

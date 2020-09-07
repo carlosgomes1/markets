@@ -135,3 +135,54 @@ export const TextArea = styled.textarea`
 
   margin: 24px 0;
 `;
+
+export const ProductConfirmContainer = styled.div`
+  width: 80%;
+  margin: 32px 0;
+`;
+
+export const ProductInformation = styled.span`
+  font: 500 2.3rem ${Fonts.main};
+  color: ${Colors.primary};
+`;
+
+export const ProductLabel = styled.h1`
+  font: 700 2.5rem ${Fonts.main};
+  color: ${Colors.primary};
+`;
+
+export const UploadContainer = styled.div`
+  width: 100%;
+  height: 100%;
+  max-height: 150px;
+
+  margin: 24px 0;
+
+  border: 2px solid ${Colors.primary};
+  border-radius: 8px;
+
+  padding: 8px;
+
+  label {
+    div {
+      width: 100%;
+      height: 100%;
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      border: 2px dashed ${Colors.primary};
+      border-radius: 8px;
+
+      h1 {
+        font: 500 2rem ${Fonts.main};
+        color: ${Colors.primary};
+      }
+    }
+
+    input {
+      display: none;
+    }
+  }
+`;
