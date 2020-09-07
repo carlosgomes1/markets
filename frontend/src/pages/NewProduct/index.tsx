@@ -5,6 +5,8 @@ import { useHistory } from 'react-router-dom';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 
+import Colors from '../../design/color';
+
 import product_register_svg from '../../assets/product_register.svg';
 
 import { Container, Content, FormContainer, Input, Button } from './styles';
@@ -32,10 +34,14 @@ const NewProduct: React.FC = () => {
       <Content>
         <img src={product_register_svg} alt="SVG Produto" />
         <FormContainer>
-          <FiArrowLeft size={24} color="#575a89" onClick={handleNavigateBack} />
+          <FiArrowLeft
+            size={24}
+            color={Colors.primary}
+            onClick={handleNavigateBack}
+          />
           <h1> Primeiro, informe qual o nome do produto: </h1>
           <Input />
-          <Button> Continuar </Button>
+          <Button onClick={() => {}}> Continuar </Button>
         </FormContainer>
       </Content>
       <Footer />

@@ -1,5 +1,8 @@
 import styled from 'styled-components';
 
+import Colors from '../../design/color';
+import Fonts from '../../design/font';
+
 interface MyProps {
   tipo: string;
 }
@@ -52,13 +55,13 @@ export const Content = styled.div`
   align-self: center;
 
   h1 {
-    font: 700 4.6rem Archivo;
-    color: #575a89;
+    font: 700 4.6rem ${Fonts.main};
+    color: ${Colors.primary};
   }
 
   p {
     margin-top: 16px;
-    font: 500 1.8rem Archivo;
+    font: 500 1.8rem ${Fonts.main};
   }
 `;
 
@@ -69,22 +72,23 @@ export const ButtonContainer = styled.div`
 `;
 
 export const Button = styled.button`
-  border: 1px solid #575a89;
+  border: 1px solid ${Colors.primary};
   background-color: ${(props: MyProps) =>
-    props.tipo === 'login' ? '#575a89' : 'white'};
-  color: ${(props: MyProps) => (props.tipo === 'login' ? 'white' : '#575a89')};
+    props.tipo === 'login' ? `${Colors.primary}` : `${Colors.secondary}`};
+  color: ${(props: MyProps) =>
+    props.tipo === `login` ? `${Colors.secondary}` : `${Colors.primary}`};
   width: 48%;
   border-radius: 8px;
   padding: 8px;
-  font: 500 1.6rem Archivo;
+  font: 500 1.6rem ${Fonts.main};
   cursor: pointer;
 
   transition: 0.3s;
 
   &:hover {
     background-color: ${(props: MyProps) =>
-      props.tipo === 'login' ? 'white' : '#575a89'};
+      props.tipo === 'login' ? `${Colors.secondary}` : `${Colors.primary}`};
     color: ${(props: MyProps) =>
-      props.tipo === 'login' ? '#575a89' : 'white'};
+      props.tipo === 'login' ? `${Colors.primary}` : `${Colors.secondary}`};
   }
 `;

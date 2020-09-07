@@ -1,6 +1,9 @@
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import Colors from '../../design/color';
+import Fonts from '../../design/font';
+
 const AppearFromBottom = keyframes`
   from {
     opacity: 0;
@@ -59,7 +62,7 @@ export const LeftHeaderContent = styled.div`
   }
 
   strong {
-    font: 500 1.9rem Archivo;
+    font: 500 1.9rem ${Fonts.main};
   }
 
   &:hover {
@@ -76,32 +79,32 @@ export const ButtonAddNewProduct = styled(Link)`
   text-decoration: none;
 
   strong {
-    color: white;
-    font: 500 1.6rem Archivo;
+    color: ${Colors.secondary};
+    font: 500 1.6rem ${Fonts.main};
   }
 
   svg {
     margin-left: 8px;
-    color: white;
+    color: ${Colors.secondary};
   }
 
-  border: 1px solid #575a89;
+  border: 1px solid ${Colors.primary};
   border-radius: 4px;
 
-  background-color: #575a89;
+  background-color: ${Colors.primary};
 
   transition: 0.3s;
 
   &:hover {
     strong {
-      color: #575a89;
+      color: ${Colors.primary};
     }
 
     svg {
-      color: #575a89;
+      color: ${Colors.primary};
     }
 
-    background-color: white;
+    background-color: ${Colors.secondary};
   }
 
   cursor: pointer;
@@ -115,8 +118,8 @@ export const Products = styled.div`
   flex-direction: column;
 
   > strong {
-    font: 700 3.3rem Archivo;
-    color: #575a89;
+    font: 700 3.3rem ${Fonts.main};
+    color: ${Colors.primary};
     margin-bottom: 8px;
   }
 `;
@@ -135,7 +138,7 @@ export const ProductItem = styled.div`
   display: flex;
   flex-direction: column;
 
-  border: 2px solid #575a89;
+  border: 2px solid ${Colors.primary};
   border-radius: 8px;
 
   padding: 8px;
@@ -149,7 +152,7 @@ export const ProductItem = styled.div`
 `;
 
 export const ProductItemTitle = styled.strong`
-  font: 700 2rem Archivo;
+  font: 700 2rem ${Fonts.main};
   margin-bottom: 4px;
 `;
 
@@ -158,14 +161,14 @@ export const ProductItemPrice = styled.div`
   align-items: center;
 
   > span {
-    font: 600 1.5rem Archivo;
+    font: 600 1.5rem ${Fonts.main};
     color: red;
     margin-right: 8px;
     text-decoration: line-through;
   }
 
   > strong {
-    font: 700 1.7rem Archivo;
+    font: 700 1.7rem ${Fonts.main};
     color: #0ed600;
   }
 
@@ -173,6 +176,6 @@ export const ProductItemPrice = styled.div`
 `;
 
 export const ProductItemDescription = styled.p`
-  font: 500 1.8rem Archivo;
+  font: 500 1.8rem ${Fonts.main};
   color: #7c7c7c;
 `;

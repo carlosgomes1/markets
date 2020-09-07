@@ -1,5 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
+import Colors from '../../design/color';
+import Fonts from '../../design/font';
+
 const AppearFromLeft = keyframes`
   from {
     opacity: 0;
@@ -63,20 +66,20 @@ export const FormContainer = styled.form`
   }
 
   > h1 {
-    font: 700 3rem Archivo;
-    color: #575a89;
+    font: 700 3rem ${Fonts.main};
+    color: ${Colors.primary};
     text-align: center;
   }
 `;
 
 export const Input = styled.input`
   padding: 8px;
-  border: 1.6px solid #575a89;
+  border: 1.6px solid ${Colors.primary};
   border-radius: 8px;
 
   width: 80%;
 
-  font: 500 1.8rem Archivo;
+  font: 500 1.8rem ${Fonts.main};
 
   margin: 24px 0;
 `;
@@ -85,19 +88,19 @@ export const Button = styled.button`
   width: 80%;
 
   border-radius: 8px;
-  border: 1px solid #575a89;
+  border: 1px solid ${Colors.primary};
 
-  background-color: #575a89;
-  color: white;
-  font: 500 1.6rem Archivo;
+  background-color: ${Colors.primary};
+  color: ${Colors.secondary};
+  font: 500 1.6rem ${Fonts.main};
 
   padding: 8px;
 
   transition: 0.3s;
 
   &:hover {
-    background-color: white;
-    color: #575a89;
+    background-color: ${Colors.secondary};
+    color: ${Colors.primary};
   }
 
   cursor: pointer;

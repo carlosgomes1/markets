@@ -1,5 +1,8 @@
 import styled, { keyframes } from 'styled-components';
 
+import Colors from '../../design/color';
+import Fonts from '../../design/font';
+
 const AppearFromRight = keyframes`
   from {
     opacity: 0;
@@ -66,8 +69,8 @@ export const FormContainer = styled.div`
   animation: ${AppearFromRight} 1s;
 
   h1 {
-    font: 700 4rem Archivo;
-    color: #575a89;
+    font: 700 4rem ${Fonts.main};
+    color: ${Colors.primary};
   }
 `;
 
@@ -85,7 +88,7 @@ export const Form = styled.form`
 
 export const InputContainer = styled.div`
   width: 90%;
-  border: 1.6px solid #575a89;
+  border: 1.6px solid ${Colors.primary};
   border-radius: 8px;
   padding: 8px;
 
@@ -96,14 +99,14 @@ export const InputContainer = styled.div`
 
   svg {
     font-size: 20px;
-    color: #575a89;
+    color: ${Colors.primary};
   }
 
   input {
     flex: 1;
     border: 0;
     margin-left: 8px;
-    font: 500 1.8rem Archivo;
+    font: 500 1.8rem ${Fonts.main};
   }
 `;
 
@@ -116,21 +119,21 @@ export const InputContainerDouble = styled.div`
 
   svg {
     font-size: 20px;
-    color: #575a89;
+    color: ${Colors.primary};
   }
 
   input {
     flex: 1;
     border: 0;
     margin-left: 20px;
-    font: 500 1.8rem Archivo;
+    font: 500 1.8rem ${Fonts.main};
   }
 `;
 
 export const NumberContainer = styled.div`
   width: 35%;
 
-  border: 1.6px solid #575a89;
+  border: 1.6px solid ${Colors.primary};
   border-radius: 8px;
   padding: 8px;
 
@@ -139,21 +142,21 @@ export const NumberContainer = styled.div`
 
   svg {
     font-size: 20px;
-    color: #575a89;
+    color: ${Colors.primary};
   }
 
   input {
     width: 75%;
     border: 0;
     margin-left: 8px;
-    font: 500 1.8rem Archivo;
+    font: 500 1.8rem ${Fonts.main};
   }
 `;
 
 export const ComplementoContainer = styled.div`
   width: 63%;
 
-  border: 1.6px solid #575a89;
+  border: 1.6px solid ${Colors.primary};
   border-radius: 8px;
   padding: 8px;
 
@@ -162,14 +165,14 @@ export const ComplementoContainer = styled.div`
 
   svg {
     font-size: 20px;
-    color: #575a89;
+    color: ${Colors.primary};
   }
 
   input {
     width: 75%;
     border: 0;
     margin-left: 8px;
-    font: 500 1.8rem Archivo;
+    font: 500 1.8rem ${Fonts.main};
   }
 `;
 
@@ -180,17 +183,17 @@ export const Button = styled.button`
 
   margin-top: 12px;
 
-  border: 1px solid #575a89;
+  border: 1px solid ${Colors.primary};
 
-  background-color: #575a89;
-  color: white;
-  font: 500 1.6rem Archivo;
+  background-color: ${Colors.primary};
+  color: ${Colors.secondary};
+  font: 500 1.6rem ${Fonts.main};
 
   transition: 0.3s;
 
   &:hover {
-    background-color: white;
-    color: #575a89;
+    background-color: ${Colors.secondary};
+    color: ${Colors.primary};
   }
 
   cursor: pointer;

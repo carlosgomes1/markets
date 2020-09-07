@@ -8,6 +8,8 @@ import Footer from '../../components/Footer';
 import api from '../../services/api';
 import { useAuth } from '../../hooks/auth';
 
+import Colors from '../../design/color';
+
 import {
   Container,
   Content,
@@ -54,7 +56,7 @@ const Dashboard: React.FC = () => {
       <Content>
         <HeaderContent>
           <LeftHeaderContent onClick={signOut}>
-            <FaSignOutAlt size={30} color="#575a89" />
+            <FaSignOutAlt size={30} color={Colors.primary} />
             <strong> Sair do app </strong>
           </LeftHeaderContent>
           <ButtonAddNewProduct to="/newproduct">
